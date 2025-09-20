@@ -27,6 +27,13 @@ def generate_launch_description():
                      'robot_description': Command(['xacro ', robot_desc_path])}]
     )
 
+    joint_state_publisher_gui_node = Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        name='joint_state_publisher_gui',
+        output='screen'
+    )
+
     # Load RViz Configuration File #
     rviz_config_file = "config.rviz"
     rviz_config_path = os.path.join(package_directory, "rviz", rviz_config_file)
@@ -41,13 +48,6 @@ def generate_launch_description():
         emulate_tty=True,
         parameters=[{'use_sim_time': True}],
         arguments=['-d', rviz_config_path],
-    )
-
-    joint_state_publisher_gui_node = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        name='joint_state_publisher_gui',
-        output='screen'
     )
 
     # Create and Return the Launch Description Object #
