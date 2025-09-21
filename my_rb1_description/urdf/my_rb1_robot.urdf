@@ -143,10 +143,10 @@
 
     <!-- Joint connecting base_link and front_caster -->
     <joint name="base_link_front_caster_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="0.1 0 -0.15" />
+        <origin rpy="0 0 0" xyz="0.1 0 -0.1625" />
         <child link="front_caster" />
         <parent link="base_link" />
-        <joint_properties damping="1.0" friction="0.0" />
+        <joint_properties friction="0.0" />
     </joint>
 
     <!-- Front caster -->
@@ -161,13 +161,13 @@
 
         <!-- Caster wheel support -->
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0.0185" />
             <geometry>
                 <sphere radius="0.03" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0.0185" />
             <geometry>
                 <sphere radius="0.03" />
             </geometry>
@@ -176,13 +176,13 @@
 
         <!-- Caster wheel -->
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0.0125" />
             <geometry>
                 <sphere radius="0.025" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0.0125" />
             <geometry>
                 <sphere radius="0.025" />
             </geometry>
@@ -192,10 +192,10 @@
 
     <!-- Joint connecting base_link and back_caster -->
     <joint name="base_link_back_caster_joint" type="fixed">
-        <origin rpy="0 0 0" xyz="-0.1 0 -0.15" />
+        <origin rpy="0 0 0" xyz="-0.1 0 -0.1625" />
         <child link="back_caster" />
         <parent link="base_link" />
-        <joint_properties damping="1.0" friction="0.0" />
+        <joint_properties friction="0.0" />
     </joint>
 
     <!-- Back caster -->
@@ -210,13 +210,13 @@
 
         <!-- Caster wheel support -->
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0.0185" />
             <geometry>
                 <sphere radius="0.03" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0.0185" />
             <geometry>
                 <sphere radius="0.03" />
             </geometry>
@@ -225,13 +225,13 @@
 
         <!-- Caster wheel -->
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0.0125" />
             <geometry>
                 <sphere radius="0.025" />
             </geometry>
         </collision>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0.0125" />
             <geometry>
                 <sphere radius="0.025" />
             </geometry>
@@ -356,12 +356,75 @@
         </inertial>
     </link>
 
-    <!-- Joint - base / left wheel -->
+    <!-- Joint - base / laser -->
     <joint name="base_link_front_laser_joint" type="fixed">
         <origin xyz="0.25 0.0 0.075" rpy="3.14159265 0 0" />
         <child link="front_laser" />
         <parent link="base_link" />
     </joint>
+
+
+    <!-- Differential Drive Plugin -->
+    <gazebo>
+        <plugin
+            filename="libignition-gazebo-diff-drive-system.so"
+            name="ignition::gazebo::systems::DiffDrive">
+            <left_joint>joint_base_left_wheel</left_joint>
+            <right_joint>joint_base_right_wheel</right_joint>
+            <wheel_separation>0.5</wheel_separation>
+            <wheel_radius>0.025</wheel_radius>
+            <odom_publish_frequency>20</odom_publish_frequency>
+            <topic>cmd_vel</topic>
+            <odom_topic>odom</odom_topic>
+            <tf_topic>tf</tf_topic>
+            <frame_id>odom</frame_id>
+            <child_frame_id>base_link</child_frame_id>
+        </plugin>
+    </gazebo>
+
+    <!-- Gazebo tags - Laser scan -->
+    <gazebo reference="base_link_front_laser_joint">
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+
+    <!-- Laser Scanner Plugin -->
+    <gazebo>
+        <plugin
+        filename="libignition-gazebo-sensors-system"
+        name="ignition::gazebo::systems::Sensors">
+        <!-- use ogre2 if ogre v2.x is installed, otherwise use ogre -->
+        <render_engine>ogre2</render_engine>
+        </plugin>
+    </gazebo>
+    <gazebo reference="front_laser">
+        <sensor type="gpu_lidar" name="head_hokuyo_sensor">
+            <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
+            <always_on>1</always_on>
+            <visualize>true</visualize>
+            <update_rate>20</update_rate>
+            <topic>/scan</topic>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>720</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-1.570796</min_angle>
+                        <max_angle>1.570796</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.20</min>
+                    <max>10.0</max>
+                    <resolution>0.01</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+            </ray>
+        </sensor>
+    </gazebo>
 
 
 </robot>
