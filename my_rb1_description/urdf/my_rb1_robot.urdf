@@ -402,7 +402,7 @@
             <always_on>1</always_on>
             <visualize>true</visualize>
             <update_rate>20</update_rate>
-            <topic>/scan</topic>
+            <topic>scan</topic>
             <ray>
                 <scan>
                     <horizontal>
