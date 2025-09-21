@@ -35,7 +35,7 @@ def generate_launch_description():
     )
 
     # Load RViz Configuration File #
-    rviz_config_file = "config.rviz"
+    rviz_config_file = "config2.rviz"
     rviz_config_path = os.path.join(package_directory, "rviz", rviz_config_file)
     print("RViz Config Loaded !")
 
