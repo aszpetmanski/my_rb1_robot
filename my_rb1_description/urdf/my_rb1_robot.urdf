@@ -17,10 +17,10 @@
 
     <gazebo reference="link_left_wheel">
         <visual>
-            <material> <!-- Pink -->
-                <ambient>0.30 0.06 0.18 1.0</ambient>
-                <diffuse>1.0 0.20 0.60 1.0</diffuse>
-                <specular>1.0 0.60 0.90 1.0</specular>
+            <material> <!-- Red for drive wheel -->
+                <ambient>0.20 0.00 0.00 1.0</ambient>
+                <diffuse>1.00 0.00 0.00 1.0</diffuse>
+                <specular>0.50 0.50 0.50 1.0</specular>
                 <emissive>0.0 0.0 0.0 1.0</emissive>
                 <shininess>90</shininess>
             </material>
@@ -38,10 +38,10 @@
     </gazebo>
     <gazebo reference="link_right_wheel">
         <visual>
-            <material> <!-- Pink -->
-                <ambient>0.30 0.06 0.18 1.0</ambient>
-                <diffuse>1.0 0.20 0.60 1.0</diffuse>
-                <specular>1.0 0.60 0.90 1.0</specular>
+            <material> <!-- Red for drive wheel -->
+                <ambient>0.20 0.00 0.00 1.0</ambient>
+                <diffuse>1.00 0.00 0.00 1.0</diffuse>
+                <specular>0.50 0.50 0.50 1.0</specular>
                 <emissive>0.0 0.0 0.0 1.0</emissive>
                 <shininess>90</shininess>
             </material>
@@ -60,11 +60,11 @@
 
     <gazebo reference="front_caster">
         <visual>
-            <material> <!-- Green -->
-                <ambient>0.10 0.40 0.10 1.0</ambient>
-                <diffuse>0.00 1.00 0.00 1.0</diffuse>
-                <specular>0.90 0.90 0.90 1.0</specular>
-                <emissive>0.00 0.20 0.00 1.0</emissive>
+            <material> <!-- Gray for caster -->
+                <ambient>0.20 0.20 0.20 1.0</ambient>
+                <diffuse>0.40 0.40 0.40 1.0</diffuse>
+                <specular>0.80 0.80 0.80 1.0</specular>
+                <emissive>0.00 0.00 0.00 1.0</emissive>
                 <shininess>90</shininess>
             </material>
         </visual>
@@ -82,11 +82,11 @@
 
     <gazebo reference="back_caster">
         <visual>
-            <material> <!-- Green -->
-                <ambient>0.10 0.40 0.10 1.0</ambient>
-                <diffuse>0.00 1.00 0.00 1.0</diffuse>
-                <specular>0.90 0.90 0.90 1.0</specular>
-                <emissive>0.00 0.20 0.00 1.0</emissive>
+            <material> <!-- Gray for caster -->
+                <ambient>0.20 0.20 0.20 1.0</ambient>
+                <diffuse>0.40 0.40 0.40 1.0</diffuse>
+                <specular>0.80 0.80 0.80 1.0</specular>
+                <emissive>0.00 0.00 0.00 1.0</emissive>
                 <shininess>90</shininess>
             </material>
         </visual>
@@ -263,13 +263,13 @@
 
         <!-- Tires -->
         <collision>
-            <origin rpy="1.5707 0 0" xyz="0 0.07 0" />
+            <origin rpy="1.5707 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.04" radius="0.025"/>
             </geometry>
         </collision>
         <visual>
-            <origin rpy="1.5707 0 0" xyz="0 0.07 0" />
+            <origin rpy="1.5707 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.04" radius="0.025"/>
             </geometry>
@@ -278,13 +278,13 @@
 
         <!-- Axle -->
         <collision>
-            <origin rpy="1.5707 0 0" xyz="0 0.03 0" />
+            <origin rpy="1.5707 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.06" radius="0.01"/>
             </geometry>
         </collision>
         <visual>
-            <origin rpy="1.5707 0 0" xyz="0 0.03 0" />
+            <origin rpy="1.5707 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.06" radius="0.01"/>
             </geometry>
@@ -315,13 +315,13 @@
 
         <!-- Tires -->
         <collision>
-            <origin rpy="1.5707 0 0" xyz="0 -0.07 0" />
+            <origin rpy="1.5707 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.04" radius="0.025"/>
             </geometry>
         </collision>
         <visual>
-            <origin rpy="1.5707 0 0" xyz="0 -0.07 0" />
+            <origin rpy="1.5707 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.04" radius="0.025"/>
             </geometry>
@@ -330,13 +330,13 @@
 
         <!-- Axle -->
         <collision>
-            <origin rpy="1.5707 0 0" xyz="0 -0.03 0" />
+            <origin rpy="1.5707 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.06" radius="0.01"/>
             </geometry>
         </collision>
         <visual>
-            <origin rpy="1.5707 0 0" xyz="0 -0.03 0" />
+            <origin rpy="1.5707 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.06" radius="0.01"/>
             </geometry>
@@ -371,7 +371,7 @@
             name="ignition::gazebo::systems::DiffDrive">
             <left_joint>joint_base_left_wheel</left_joint>
             <right_joint>joint_base_right_wheel</right_joint>
-            <wheel_separation>0.5</wheel_separation>
+            <wheel_separation>0.4</wheel_separation>
             <wheel_radius>0.025</wheel_radius>
             <odom_publish_frequency>20</odom_publish_frequency>
             <topic>cmd_vel</topic>
@@ -398,7 +398,7 @@
     </gazebo>
     <gazebo reference="front_laser">
         <sensor type="gpu_lidar" name="head_hokuyo_sensor">
-            <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
+            <pose relative_to='front_laser'>0 0 0 0 0 0</pose>
             <always_on>1</always_on>
             <visualize>true</visualize>
             <update_rate>20</update_rate>
