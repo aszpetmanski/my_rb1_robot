@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- ===== World / Gazebo options ===== -->
+  <arg name="world_name" default="$(find gazebo_ros)/worlds/empty.world"/>
+  <arg name="paused"      default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="headless"    default="false"/>
+  <arg name="verbose"     default="true"/>
+
+  <!-- Bring up Gazebo Classic with an empty world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name"  value="$(arg world_name)"/>
+    <arg name="paused"      value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless"    value="$(arg headless)"/>
+    <arg name="verbose"     value="$(arg verbose)"/>
+  </include>
+
+  <!-- ===== Spawn pose + model naming ===== -->
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.3"/>
+  <arg name="yaw" default="0.0"/>
+  <arg name="model_name" default="my_robot"/>
+
+  <param name="robot_description"
+         textfile="$(find my_rb1_description)/urdf/my_rb1_robot.urdf"/>
+
+  <!-- Robot State Publisher -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+    <param name="use_tf_static" value="true"/>
+  </node>
+
+  <!-- Spawn the model into Gazebo Classic -->
+  <node name="spawn_my_robot"
+        pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-urdf -param robot_description -model $(arg model_name)
+              -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg yaw)"/>
+
+</launch>
