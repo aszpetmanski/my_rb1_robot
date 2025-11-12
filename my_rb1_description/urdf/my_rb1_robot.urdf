@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="rb1_robot">
 
-  <!-- Simple URDF materials (used by RViz/URDF); Gazebo visual is set via <gazebo reference> below -->
+  
   <material name="blue"><color rgba="0 0 1 1"/></material>
   <material name="gray"><color rgba="0.40 0.40 0.40 1"/></material>
   <material name="red"><color rgba="1 0 0 1"/></material>
@@ -204,7 +204,7 @@
     <child  link="front_laser"/>
   </joint>
 
-  <!-- ===== Gazebo Classic bits ===== -->
+
 
   <!-- Visual materials in Gazebo Classic -->
   <gazebo reference="base_link">
@@ -212,7 +212,7 @@
   </gazebo>
 
   <gazebo reference="link_left_wheel">
-    <!-- friction/contact tuned for drive traction -->
+    
     <mu1 value="5.0"/>
     <mu2 value="0.5"/>
     <kp  value="10000000.0"/>
