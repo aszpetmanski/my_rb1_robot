@@ -20,7 +20,7 @@
   <!-- ===== Spawn pose + model naming ===== -->
   <arg name="x" default="-0.43"/>
   <arg name="y" default="-1.33"/>
-  <arg name="z" default="0.3"/>
+  <arg name="z" default="0"/>
   <arg name="yaw" default="0.0"/>
   <arg name="model_name" default="my_robot"/>
 

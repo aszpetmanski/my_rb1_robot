@@ -33,7 +33,7 @@
   <joint name="base_link_plate_joint" type="fixed">
     <parent link="base_footprint"/>
     <child  link="base_link"/>
-    <origin xyz="0 0 0.15" rpy="0 0 0"/>
+    <origin xyz="0 0 0.175" rpy="0 0 0"/>
   </joint>
 
   <!-- Front caster -->
@@ -147,6 +147,7 @@
     <child  link="link_left_wheel"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
+    <dynamics damping="0.3" friction="0.0"/>
   </joint>
 
   <!-- Right wheel -->
@@ -186,6 +187,7 @@
     <child  link="link_right_wheel"/>
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
+    <dynamics damping="0.3" friction="0.0"/>
   </joint>
 
   <!-- Laser link -->
@@ -213,38 +215,44 @@
 
   <gazebo reference="link_left_wheel">
     
-    <mu1 value="5.0"/>
-    <mu2 value="0.5"/>
-    <kp  value="10000000.0"/>
-    <kd  value="1.0"/>
-    <fdir1 value="1 0 0"/>
+    <mu1>10.0</mu1>   <!-- along fdir1 -->
+    <mu2>2.0</mu2>    <!-- lateral -->
+    <slip1>0.0</slip1>
+    <slip2>0.0</slip2>
+    <fdir1>1 0 0</fdir1>
+    <kp>1e7</kp>
+    <kd>30.0</kd>
     <material>Gazebo/Red</material>
   </gazebo>
 
   <gazebo reference="link_right_wheel">
-    <mu1 value="5.0"/>
-    <mu2 value="0.5"/>
-    <kp  value="10000000.0"/>
-    <kd  value="1.0"/>
-    <fdir1 value="1 0 0"/>
+    <mu1>10.0</mu1>   <!-- along fdir1 -->
+    <mu2>2.0</mu2>    <!-- lateral -->
+    <slip1>0.0</slip1>
+    <slip2>0.0</slip2>
+    <fdir1>1 0 0</fdir1>
+    <kp>1e7</kp>
+    <kd>30.0</kd>
     <material>Gazebo/Red</material>
   </gazebo>
 
   <gazebo reference="front_caster">
-    <mu1 value="0.0"/>
-    <mu2 value="0.0"/>
-    <kp  value="10000000.0"/>
-    <kd  value="100.0"/>
-    <fdir1 value="0 0 1"/>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <slip1>0.0</slip1>
+    <slip2>0.0</slip2>
+    <kp>1e7</kp>
+    <kd>50.0</kd>   <!-- a bit more damping -->
     <material>Gazebo/Gray</material>
   </gazebo>
 
   <gazebo reference="back_caster">
-    <mu1 value="0.0"/>
-    <mu2 value="0.0"/>
-    <kp  value="10000000.0"/>
-    <kd  value="100.0"/>
-    <fdir1 value="0 0 1"/>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <slip1>0.0</slip1>
+    <slip2>0.0</slip2>
+    <kp>1e7</kp>
+    <kd>50.0</kd>   <!-- a bit more damping -->
     <material>Gazebo/Gray</material>
   </gazebo>
 
